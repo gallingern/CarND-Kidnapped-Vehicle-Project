@@ -10,6 +10,7 @@
 #define PARTICLE_FILTER_H_
 
 #include "helper_functions.h"
+#include <array>
 
 struct Particle {
 
@@ -21,6 +22,10 @@ struct Particle {
 	std::vector<int> associations;
 	std::vector<double> sense_x;
 	std::vector<double> sense_y;
+	
+	std::vector<std::array<double,2>> observations;
+	std::vector<Map::single_landmark_s> landmarks;
+
 };
 
 
@@ -78,7 +83,7 @@ public:
 	 * @param predicted Vector of predicted landmark observations
 	 * @param observations Vector of landmark observations
 	 */
-	void dataAssociation(std::vector<LandmarkObs> predicted, std::vector<LandmarkObs>& observations);
+	void dataAssociation(double sensor_range, std::vector<LandmarkObs> observations, const Map &map_landmarks);
 	
 	/**
 	 * updateWeights Updates the weights for each particle based on the likelihood of the 
