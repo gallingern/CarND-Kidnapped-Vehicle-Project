@@ -148,7 +148,6 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
   //   http://planning.cs.uiuc.edu/node99.html
   
   double weight;
-  double normalize = 0;
   dataAssociation(sensor_range, observations, map_landmarks);
   weights.clear();
   
@@ -171,7 +170,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
       weight = weight * gauss_norm * exp(-exponent);
     }
 
-    particle[i].weight = weight;
+    particles[i].weight = weight;
     weights.push_back(weight);
   }
 }
